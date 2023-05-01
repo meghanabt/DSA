@@ -35,23 +35,31 @@ public class Main {
 class Solution {
     void pushZerosToEnd(int[] arr, int n) {
         // code here
-        int count=0,zero=0;
-        for(int i=0;i<n;i++)
+        int k=0;
+        while(k<n)
         {
-            if(arr[i]!=0){
-                arr[count]=arr[i];
-                count++;
-            }
-            else{
-                zero++;
-            }
+            if(arr[k]==0)
+          {
+              break;
+          }
+          else{
+              k++;
+          }
         }
-        while(zero>0)
-        {
-            arr[count]=0;
-            count++;
-            zero--;
+        
+        int i=k,j=k+1,temp=0;
+        while(i<arr.length && j<arr.length){
+            if(arr[j]!=0){
+                temp=arr[j];
+                arr[j]=0;
+                arr[i]=temp;
+                i++;
+            }
+            j++;
         }
+        
+        
+        
         
     }
 }
