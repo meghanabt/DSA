@@ -111,23 +111,25 @@ class Node {
 } */
 class Solution {
     // Function to return a list containing the inorder traversal of the tree.
+    
+    ArrayList<Integer> list= new ArrayList<>();
     ArrayList<Integer> inOrder(Node root) {
         // Code
-      ArrayList<Integer> ans= new ArrayList<>();
-      inOrder(root,ans);
-        
-        return ans;
+        inorder(root);
+        return list;
     }
     
-    static void inOrder(Node root,ArrayList<Integer> ans)
+    void inorder(Node root)
     {
-        
         if(root==null)
-        return;
+        {
+            return;
+        }
         
-        inOrder(root.left,ans);
-        ans.add(root.data);
-        inOrder(root.right,ans);
-        
+        inorder(root.left);
+        list.add(root.data);
+        inorder(root.right);
+        // list.add(root.data);
+
     }
 }
