@@ -15,7 +15,7 @@
  */
 class Solution {  
     
-        int count =0;
+    int count =0;
     int out=0;
     public int kthSmallest(TreeNode root, int k) {
         recur(root, k);
