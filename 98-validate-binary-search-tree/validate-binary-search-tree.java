@@ -14,20 +14,18 @@
  * }
  */
 class Solution {
-   public boolean isValidBST(TreeNode root) {
-   if (root == null) return true;
-   Stack<TreeNode> stack = new Stack<>();
-   TreeNode pre = null;
-   while (root != null || !stack.isEmpty()) {
-      while (root != null) {
-         stack.push(root);
-         root = root.left;
-      }
-      root = stack.pop();
-      if(pre != null && root.val <= pre.val) return false;
-      pre = root;
-      root = root.right;
-   }
-   return true;
-}
+    public boolean isValidBST(TreeNode root) {
+        boolean result=bstHelper(root,Long.MIN_VALUE,Long.MAX_VALUE);
+        return result;
+    }
+    public boolean bstHelper(TreeNode root,long min,long max)
+    {
+        if(root==null)
+        {
+            return true;
+        }
+        boolean leftRes=bstHelper(root.left,min,root.val);
+        boolean rightRes=bstHelper(root.right,root.val,max);
+        return (root.val>min && root.val<max)? leftRes && rightRes:false;
+    }
 }
