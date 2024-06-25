@@ -1,15 +1,36 @@
 class Solution {
-    int x,clr,n,m;
-    public int[][] floodFill(int[][] grid, int sr, int sc, int color) {
-        x=grid[sr][sc];clr=color;n=grid.length;m=grid[0].length;
-        bfs(sr,sc,grid);
-        return grid;
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+
+        int n= image.length;
+        int m= image[0].length;
+
+        int ans[][]= image;
+
+        int[] drow= {-1, 0, 1, 0};
+        int[] dcol= {0, 1, 0, -1};
+        int initialColor = image[sr][sc];
+
+        dfs(image, sr, sc, drow, dcol, ans, initialColor, color);
+
+        return ans;
+        
     }
-    public void bfs(int i,int j,int[][] grid){
-        grid[i][j]=clr;
-        if(i>0 && grid[i-1][j]==x && grid[i-1][j]!=clr) bfs(i-1,j,grid);
-        if(i<n-1 && grid[i+1][j]==x && grid[i+1][j]!=clr) bfs(i+1,j,grid);
-        if(j>0 && grid[i][j-1]==x && grid[i][j-1]!=clr) bfs(i,j-1,grid);
-        if(j<m-1 && grid[i][j+1]==x && grid[i][j+1]!=clr) bfs(i,j+1,grid);
+
+    public static void dfs(int[][] image, int row, int col, int[] drow, int[] dcol, int[][] ans, int initialColor, int color)
+    {
+        for(int i=0; i<4; i++)
+        {
+
+            ans[row][col]= color;
+
+            int  nrow = row + drow[i]; 
+             int ncol = col + dcol[i];
+
+            if(nrow>=0 && nrow< image.length && ncol >=0 && ncol< image[0].length && image[nrow][ncol]== initialColor && ans[nrow][ncol] != color)
+            {
+                
+                dfs(image, nrow, ncol, drow, dcol, ans, initialColor, color);
+            }
+        }
     }
 }
